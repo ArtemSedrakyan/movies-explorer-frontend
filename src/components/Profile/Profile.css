@@ -1,0 +1,45 @@
+.form__field {
+  width: 100%;
+  margin: 0;
+  padding: 16px 0;
+  border-bottom: 1px solid #e8e8e8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 1.21;
+  font-size: 11px;
+}
+
+.form__field:first-of-type {
+  padding-top: 0;
+}
+
+.form__field:last-of-type {
+  border: none;
+  padding-bottom: 0;
+  margin-bottom: 220px;
+}
+
+.form__input-title {
+  font-weight: 500;
+}
+
+.form__input {
+  max-width: 122px;
+  padding: 0;
+  border: none;
+  text-align: end;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 1140px) {
+  .form__field:last-of-type {
+  margin-bottom: 210px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .form__field:last-of-type {
+    margin-bottom: 50px;
+  }
+}

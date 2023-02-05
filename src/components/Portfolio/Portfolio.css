@@ -1,0 +1,40 @@
+.about-me__portfolio_type_link-el {
+  padding-top: 20px;
+    border-top: 1px solid #e8e8e8;
+  line-height: 1.66;
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.about-me__portfolio_type_link-el:first-child {
+  border-top: 0;
+}
+
+.about-me__portfolio_type_link:hover {
+  opacity: .7;
+}
+
+.about-me__portfolio_type_link {
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  color: #000;
+}
+
+.about-me__portfolio_type_icon {
+  transform: rotateZ(45deg);
+}
+
+@media screen and (max-width: 1140px) {
+  .about-me__portfolio_type_link {
+    font-size: 28px;
+    line-height: 1.77
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .about-me__portfolio_type_link {
+    font-size: 18px;
+    line-height: 1.55;
+  }
+}

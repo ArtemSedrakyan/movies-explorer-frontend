@@ -1,0 +1,12 @@
+.header {
+  box-sizing: border-box;
+  min-height: 74px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.header__main {
+  background-color: #465dff;
+}
