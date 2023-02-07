@@ -19,7 +19,7 @@ function SearchForm(props) {
         <img className='search-form__icon' src={searchIcon} alt='иконка поиска'></img>
         <input type='search' name='search' placeholder='Фильм'
           className='search-form__input' value={searchValue}
-          onChange={handleChangeSearchValue}
+          onChange={handleChangeSearchValue} required
         />
         <button className='search-form__submit-button' type='submit'></button>
       </fieldset>
