@@ -1,0 +1,131 @@
+.description {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.description__container {
+  border-top: 1px solid black;
+  padding-top: 70px;
+}
+
+.description__container_type_text{
+  margin-bottom: 110px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 40px;
+}
+
+.description__container_type_schema {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: auto;
+  row-gap: 14px;
+}
+
+.desription__title {
+  margin: 0 0 26px;
+  line-height: 1.21;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.description__paragraph {
+  margin: 0;
+  line-height: 1.43;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.description__scale {
+  text-align: center;
+  line-height: 2.57;
+  font-size: 14px;
+  font-weight: 400;
+  background-color: #f2f2f2;
+}
+
+.description__scale:first-child {
+  background-color: #2be080;
+}
+
+.description__scale-sign {
+  text-align: center;
+  line-height: 1.21;
+  font-size: 14px;
+  font-weight: 500;
+  color: #a0a0a0;
+}
+
+@media screen and (max-width: 1140px) {
+  .description {
+    margin: 0;
+  }
+
+  .description__container_type_text {
+    gap: 30px;
+  }
+
+  .desription__title {
+    margin: 0 0 22px;
+  }
+
+  .description__paragraph {
+    line-height: 1.5;
+    font-size: 12px;
+  }
+
+  .description__container_type_text {
+    margin-bottom: 93px;
+  }
+
+  .description__container_type_schema {
+    grid-template-columns: .21fr .79fr;
+  }
+
+  .description__scale-sign {
+    font-weight: 400;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .description {
+    margin: 0 4px;
+  }
+
+  .description__container {
+    padding-top: 60px;
+  }
+
+  .description__container_type_text {
+    margin-bottom: 60px;
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+
+  .description__container_type_schema {
+    grid-template-columns: 1fr 1.86fr;
+    row-gap: 10px;
+  }
+
+  .desription__title {
+    margin: 0 0 16px;
+    font-size: 17px;
+    line-height: 1.3;
+  }
+
+  .description__paragraph {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .description__scale {
+    font-size: 11px;
+    line-height: 3.18;
+  }
+
+  .description__scale-sign {
+    font-size: 11px;
+    line-height: 1.15;
+  }
+}

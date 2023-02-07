@@ -1,0 +1,35 @@
+/* .main {
+
+} */
+
+.main__heading {
+  max-width: 600px;
+  margin: 0;
+  margin-bottom: 23px;
+  line-height: 1.23;
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.main__container {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+@media screen and (max-width: 1140px) {
+  .main__container {
+    padding: 90px 50px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .main__heading {
+    margin-bottom: 28px;
+    font-size: 18px;
+    line-height: 1.22;
+  }
+
+  .main__container {
+    padding: 70px 14px;
+  }
+}

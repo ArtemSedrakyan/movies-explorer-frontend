@@ -1,0 +1,169 @@
+.form-page {
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 70px 0;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.form-page_type_auth {
+  min-height: 100vh;
+}
+
+.form {
+  box-sizing: border-box;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.form_type_edit {
+  width: 410px;
+}
+
+.form_type_auth {
+  width: 396px;
+}
+
+.form__title {
+  line-height: 1.2;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.form__title_type_edit {
+  margin: 4px 0 123px;
+  text-align: center;
+}
+
+.form__title_type_auth {
+  margin: 40px 0;
+  align-self: flex-start;
+}
+
+.form__submit-button {
+  width: 100%;
+  padding: 0;
+  margin: 0 0 16px;
+  text-align: center;
+}
+
+.form__submit-button:hover {
+  cursor: pointer;
+  opacity: .8;
+}
+
+.form__submit-button_type_edit {
+  border: none;
+  background: none;
+  line-height: 1.23;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.form__submit-button_type_auth {
+  height: 45px;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  background-color: #ff6838;
+  line-height: 1.21;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.form__route-container {
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: nowrap;
+  line-height: 1.21;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.form__route-container_type_sign {
+  margin: 0 6px 0 0;
+  color: #a0a0a0;
+}
+
+.form__route-container_type_link {
+  text-decoration: none;
+  color: #ee3465;
+}
+
+.form__route-container_type_link:hover {
+  cursor: pointer;
+  opacity: .7;
+}
+
+@media screen and (max-width: 1140px) {
+  .form-page {
+    min-height: 0;
+    padding: 236px 0 0;
+  }
+
+  .form-page_type_auth {
+    padding: 232px 0 0;
+  }
+
+  .form__title_type_edit {
+    margin: 0 0 96px;
+  }
+}
+
+
+@media screen and (max-width: 580px) {
+  .form {
+    align-items: center;
+  }
+
+  .form-page {
+    min-height: 90vh;
+    padding: 70px 0 40px;
+  }
+
+  .form-page_type_auth {
+    padding: 56px 0 30px;
+    min-height: 100vh;
+  }
+
+  .form {
+    width: 100%;
+    padding: 0 30px;
+  }
+
+  .form__title_type_edit {
+    margin: 0 0 80px;
+  }
+
+  .form__title_type_auth {
+    width: 100%;
+    margin: 50px 0 80px;
+    text-align: center;
+  }
+
+  .form__submit-button {
+    margin: auto 0 16px;
+  }
+
+  .form__submit-button_type_edit {
+    line-height: 1.21;
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  .form__submit-button_type_auth {
+    line-height: 1.21;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .form__route-container {
+    line-height: 1.25;
+    font-size: 12px;
+  }
+
+  .form__route-container_type_sign {
+    margin-right: 7px;
+  }
+}
