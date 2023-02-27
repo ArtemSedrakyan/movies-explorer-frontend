@@ -41,11 +41,27 @@
   align-self: flex-start;
 }
 
+.form__button-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+}
+
 .form__submit-button {
   width: 100%;
   padding: 0;
   margin: 0 0 16px;
   text-align: center;
+}
+
+.form__submit-button_disabled {
+  border: none;
+  color: #a0a0a0;
+  background: none;
+  line-height: 1.23;
+  font-size: 13px;
+  font-weight: 400;
 }
 
 .form__submit-button:hover {
@@ -55,6 +71,7 @@
 
 .form__submit-button_type_edit {
   border: none;
+  color: #000;
   background: none;
   line-height: 1.23;
   font-size: 13px;

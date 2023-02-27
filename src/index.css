@@ -49,3 +49,6 @@
 
 /*Block ErrorPopup*/
 @import url(../src/components/ErrorPopup/ErrorPopup.css);
+
+/*block NotFoundFilms*/
+@import url(../src/components/NotFoundFilms/NotFoundFilms.css);

@@ -8,6 +8,7 @@
   align-items: center;
   line-height: 1.21;
   font-size: 11px;
+  position: relative;
 }
 
 .form__field:first-of-type {
@@ -25,12 +26,26 @@
 }
 
 .form__input {
-  max-width: 122px;
-  padding: 0;
+  padding: 0 5px;
   border: none;
   text-align: end;
   font-weight: 400;
 }
+
+.form__route-container_type_logout {
+  border: none ;
+  color: #ee3465;
+  background: none;
+  line-height: 1.23;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.form__route-container_type_logout:hover {
+  cursor: pointer;
+  opacity: .8;
+}
+
 
 @media screen and (max-width: 1140px) {
   .form__field:last-of-type {
@@ -41,5 +56,10 @@
 @media screen and (max-width: 580px) {
   .form__field:last-of-type {
     margin-bottom: 50px;
+  }
+
+  .form__route-container_type_logout {
+    line-height: 1.21;
+    font-size: 12px;
   }
 }

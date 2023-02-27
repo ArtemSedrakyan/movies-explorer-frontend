@@ -20,9 +20,12 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* .page__container {
-  height: 100vh;
-} */
+.page__container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+}
 
 .page__element {
   padding: 0 70px;

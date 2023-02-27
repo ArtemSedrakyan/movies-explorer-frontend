@@ -1,12 +1,12 @@
-function ErrorPopup(props) {
+function ErrorPopup({ status : { isOpen, errCode, errMessage }, onClose }) {
   return(
-    <div className={`error-popup ${props.isOpen && 'error-popup_opened'}`}>
+    <div className={`error-popup ${isOpen && 'error-popup_opened'}`}>
       <div className="error-popup__info-container">
-        <p className="error-popup__error-code">404</p>
-        <p className="error-popup__error-message">Страница не найдена</p>
+        <p className="error-popup__error-code">{errCode}</p>
+        <p className="error-popup__error-message">{errMessage}</p>
       </div>
       <button className="error-popup__close-button" type="button"
-        onClick={props.onClose}>Назад</button>
+        onClick={onClose}>Назад</button>
     </div>
   );
 }
