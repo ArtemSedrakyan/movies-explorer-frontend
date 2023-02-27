@@ -8,4 +8,4 @@
 
 * [Ссылка на макет](https://disk.yandex.ru/d/ZpSuPWJ35G1wmg)
 
-* [ссылка на pull request level-3](https://github.com/ArtemSedrakyan/movies-explorer-frontend/pull/2)
+* [ссылка на pull request level-3](https://github.com/ArtemSedrakyan/movies-explorer-frontend/pull/3)
