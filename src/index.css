@@ -52,3 +52,6 @@
 
 /*block NotFoundFilms*/
 @import url(../src/components/NotFoundFilms/NotFoundFilms.css);
+
+/*block NotFoundPage*/
+@import url(../src/components/NotFoundPage/NotFoundPage.css);

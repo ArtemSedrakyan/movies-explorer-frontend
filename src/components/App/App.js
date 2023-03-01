@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Switch, Route, withRouter, useLocation } from "react-router-dom";
+import { Switch, Route, withRouter, useLocation, Redirect } from "react-router-dom";
+import Cookies from "js-cookie";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -7,11 +8,12 @@ import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import ErrorPopup from "../ErrorPopup/ErrorPopup";
+import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { mainApi } from "../../utils/MainApi";
 
-function App({history}) {
+function App({ history }) {
   const location = useLocation();
   const [errorPopupStatus, setErrorPopupStatus] = useState(
     { isOpen: false,
@@ -22,6 +24,7 @@ function App({history}) {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
+  const [isSuccessful, setIsSuccessful] = useState(false);
 
   function closeErrorPopup() {
     setErrorPopupStatus({
@@ -47,18 +50,9 @@ function App({history}) {
     setIsLoading(false);
   }
 
-  //проверка наличия токена в куках
-  function checkJwtCookie() {
-    if (document.cookie.split(';').filter((item) => item.trim().startsWith('jwt=')).length) {
-      return true
-    } else {
-      return false
-    }
-  };
-
   //проверка авторизованного пользователя
   useEffect(() => {
-    const token = checkJwtCookie();
+    const token = Cookies.get('jwt');
     const userPath = location.pathname;
     if (token) {
       mainApi.getUserInfo()
@@ -91,8 +85,7 @@ function App({history}) {
     if (loggedIn && currentUser) {
       mainApi.getSavedMovies()
         .then(moviesList => {
-          const userMoviesList = moviesList.filter(movie => movie.owner === currentUser._id);
-          setSavedMovies(userMoviesList);
+          setSavedMovies(moviesList);
         })
         .catch(err => {
           showErrorPopup(err);
@@ -116,6 +109,7 @@ function App({history}) {
     await mainApi.authorize(email, password)
       .then(jwt => {
         if (jwt.token) {
+          Cookies.set('jwt', jwt.token);
           setLoggedIn(true);
           history.push('/movies');
         }
@@ -125,21 +119,34 @@ function App({history}) {
       })
   };
 
-  const handleLogOut = () => {
+  function handleLogOut() {
     mainApi.signOut(); //возвращается сообщение с бэка
     setCurrentUser({});
+    setSavedMovies([]);
     setLoggedIn(false);
+    Cookies.remove('jwt');
+    localStorage.clear();
     history.push('/');
   };
 
   //колбэк редактирования профиля
   function handleUpdateUser({ name, email }) {
+    setIsLoading(true);
     mainApi.updateUserInfo(name, email)
       .then(newUserData => {
         setCurrentUser(newUserData);
+        setIsSuccessful(true);
+        setTimeout(() => {
+          setIsSuccessful(() => {
+            return false;
+          });
+        }, 5000);
       })
       .catch(err => {
         showErrorPopup(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       })
   };
 
@@ -172,11 +179,18 @@ function App({history}) {
       })
   };
 
+  const handleClickRouteBack = () => {
+    history.goBack();
+    console.dir(history)
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Switch>
         <Route exact path="/">
-          <Main />
+          <Main
+            loggedIn={loggedIn}
+          />
         </Route>
         <ProtectedRoute
           path="/movies"
@@ -203,15 +217,35 @@ function App({history}) {
           component={Profile}
           onUpdateProfile={handleUpdateUser}
           onLogOut={handleLogOut}
+          isLoading={isLoading}
+          isSuccessful={isSuccessful}
         />
         <Route path="/signin">
-          <Login
-            onLogin={handleLogin}
-          />
+          {!loggedIn
+            ? (
+              <Login
+                onLogin={handleLogin}
+                isLoading={isLoading}
+              />
+            )
+            : (<Redirect to="/" />
+          )}
+
         </Route>
-        <Route path="/signup">
-          <Register
-            onRegister={handleRegister}
+        <Route exact path="/signup">
+          {!loggedIn
+            ? (
+              <Register
+                onRegister={handleRegister}
+                isLoading={isLoading}
+              />
+            )
+            : (<Redirect to="/" />
+          )}
+        </Route>
+        <Route path="*">
+          <NotFoundPage
+            handleClickRouteBack={handleClickRouteBack}
           />
         </Route>
       </Switch>

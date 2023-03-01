@@ -4,11 +4,12 @@ class MainApi {
     this._headers = options.headers;
   }
 
-  _checkResponse(res) {
+  async _checkResponse(res) {
+    const result = await res.json();
     if (res.ok) {
-      return res.json();
+      return result;
     }
-    return Promise.reject(`Ошибка ${res.status}`);
+    return Promise.reject({statusCode: res.status, message: result.message});
   };
 
   register(email, password, name) {

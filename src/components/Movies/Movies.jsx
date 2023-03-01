@@ -1,16 +1,16 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from "react";
 // комоненты верстки
-import Header from '../Header/Header';
+import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import Footer from '../Footer/Footer';
-import NotFoundFilms from '../NotFoundFilms/NotFoundFilms';
+import Footer from "../Footer/Footer";
+import NotFoundFilms from "../NotFoundFilms/NotFoundFilms";
 //функциональные компоненты
-import { filterShortMovies, filterMovies, transformMovieImage } from '../../utils/utils'; // функции фильтрации фильмов
-import { moviesApi } from '../../utils/MoviesApi'; // компонент с методами запросов к API beat-films
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { filterShortMovies, filterMovies, transformMovieImage } from "../../utils/utils"; // функции фильтрации фильмов
+import { moviesApi } from "../../utils/MoviesApi"; // компонент с методами запросов к API beat-films
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function Movies({ isLoading, onOpenLoader, onCloseLoader, showErrorPopup, savedMovies, onSaveClick, onDeleteClick }) {
+function Movies({ isLoading, onOpenLoader, onCloseLoader, showErrorPopup, savedMovies, onSaveClick, onDeleteClick, loggedIn }) {
   const currentUser = useContext(CurrentUserContext);
 
   const [allMovies, setAllMovies] = useState([]); //все фильмы от сервера, полученные единожды
@@ -21,7 +21,7 @@ function Movies({ isLoading, onOpenLoader, onCloseLoader, showErrorPopup, savedM
 
   //проверка чекбокса в хранилище
   useEffect(() => {
-    if (sessionStorage.getItem(`${currentUser.email} - isShortFilms` === 'true')) {
+    if (localStorage.getItem("isShortFilms" === "true")) {
       setIsShortFilms(true);
     } else {
       setIsShortFilms(false);
@@ -30,11 +30,11 @@ function Movies({ isLoading, onOpenLoader, onCloseLoader, showErrorPopup, savedM
 
   //добавить рендер фильмов из хранилища
   useEffect(() => {
-    if (sessionStorage.getItem(`${currentUser.email} - movies`)) {
-      const storageMovies = JSON.parse(sessionStorage.getItem(`${currentUser.email} - movies`));
+    if (localStorage.getItem("movies")) {
+      const storageMovies = JSON.parse(localStorage.getItem("movies"));
       setInitialMovies(storageMovies);
 
-      if (sessionStorage.getItem(`${currentUser.email} - isShortFilms`) === 'true') {
+      if (localStorage.getItem("isShortFilms") === "true") {
         setFilteredMovies(filterShortMovies(storageMovies));
       } else {
         setFilteredMovies(storageMovies);
@@ -50,7 +50,7 @@ function Movies({ isLoading, onOpenLoader, onCloseLoader, showErrorPopup, savedM
     } else {
       setFilteredMovies(initialMovies);
     }
-    sessionStorage.setItem(`${currentUser.email} - isShortFilms`, !isShortFilms);
+    localStorage.setItem("isShortFilms", !isShortFilms);
   };
 
   //колбэк поика фильма по ключевому слову и чекбоксу
@@ -64,13 +64,13 @@ function Movies({ isLoading, onOpenLoader, onCloseLoader, showErrorPopup, savedM
     setInitialMovies(moviesList);
     setFilteredMovies(isShortFilms ? filterShortMovies(moviesList) : moviesList);
 
-    sessionStorage.setItem(`${currentUser.email} - movies`, JSON.stringify(moviesList));
+    localStorage.setItem("movies", JSON.stringify(moviesList));
   };
 
   //поиск по запросу из SearchForm
   function handleSearchSubmit (inputValue) {
-    sessionStorage.setItem(`${currentUser.email} - InputValue`, inputValue);
-    sessionStorage.setItem(`${currentUser.email} - isShortFilms`, isShortFilms);
+    localStorage.setItem("InputValue", inputValue);
+    localStorage.setItem("isShortFilms", isShortFilms);
 
     if (allMovies.length === 0) {
       onOpenLoader();
@@ -93,7 +93,9 @@ function Movies({ isLoading, onOpenLoader, onCloseLoader, showErrorPopup, savedM
 
   return (
     <>
-      <Header />
+      <Header
+        loggedIn={loggedIn}
+      />
       <main className="page__element">
         <SearchForm
           isShortFilms={isShortFilms}

@@ -7,7 +7,7 @@ import NotFoundFilms from "../NotFoundFilms/NotFoundFilms";
 import { filterMovies, filterShortMovies } from "../../utils/utils";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function SavedMovies({ savedMovies, onDeleteClick }) {
+function SavedMovies({ savedMovies, onDeleteClick, loggedIn }) {
   const currentUser = useContext(CurrentUserContext);
 
   const [displayedMovies, setDisplayedMovies] = useState(savedMovies); //все сохраненные фильмы отображены
@@ -23,7 +23,7 @@ function SavedMovies({ savedMovies, onDeleteClick }) {
 
   //проверка чекбокса в хранилище
   useEffect(() => {
-    if (sessionStorage.getItem(`${currentUser.email} - isShortFilms` === 'true')) {
+    if (localStorage.getItem("isShortFilms" === "true")) {
       setIsShortFilms(true);
       setDisplayedMovies(filterShortMovies(savedMovies));
     } else {
@@ -35,11 +35,11 @@ function SavedMovies({ savedMovies, onDeleteClick }) {
   function handleToggleShortFilms() {
     if (!isShortFilms) {
       setIsShortFilms(true);
-      sessionStorage.getItem(`${currentUser.email} - isShortFilms`, 'true');
+      localStorage.getItem("isShortFilms", "true");
       setDisplayedMovies(filterShortMovies(filteredMovies));
     } else {
       setIsShortFilms(false);
-      sessionStorage.getItem(`${currentUser.email} - isShortFilms`, 'false');
+      localStorage.getItem("isShortFilms", "false");
       setDisplayedMovies(filteredMovies);
     }
   };
@@ -55,7 +55,9 @@ function SavedMovies({ savedMovies, onDeleteClick }) {
 
   return(
     <>
-    <Header />
+    <Header
+      loggedIn={loggedIn}
+    />
     <main className="page__element">
       <SearchForm
           isShortFilms={isShortFilms}
