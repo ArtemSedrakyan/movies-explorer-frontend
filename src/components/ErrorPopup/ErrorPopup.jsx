@@ -4,9 +4,9 @@ function ErrorPopup({ status : { isOpen, errCode, errMessage }, onClose }) {
       <div className="error-popup__info-container">
         <p className="error-popup__error-code">{errCode}</p>
         <p className="error-popup__error-message">{errMessage}</p>
+        <button className="error-popup__close-button" type="button"
+          onClick={onClose}>Назад</button>
       </div>
-      <button className="error-popup__close-button" type="button"
-        onClick={onClose}>Назад</button>
     </div>
   );
 }

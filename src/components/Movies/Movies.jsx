@@ -21,7 +21,7 @@ function Movies({ isLoading, onOpenLoader, onCloseLoader, showErrorPopup, savedM
 
   //проверка чекбокса в хранилище
   useEffect(() => {
-    if (localStorage.getItem("isShortFilms" === "true")) {
+    if (localStorage.getItem("isShortFilms") === "true") {
       setIsShortFilms(true);
     } else {
       setIsShortFilms(false);

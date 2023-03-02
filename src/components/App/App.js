@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route, withRouter, useLocation, Redirect } from "react-router-dom";
-import Cookies from "js-cookie";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -40,6 +39,15 @@ function App({ history }) {
       errCode: err.statusCode,
       errMessage: err.message,
     });
+    setTimeout(() => {
+      setErrorPopupStatus(() => {
+        return {
+          isOpen: false,
+          errCode: "",
+          errMessage: "",
+        };
+      });
+    }, 6000);
   };
 
   function handleOpenLoader() {
@@ -52,9 +60,7 @@ function App({ history }) {
 
   //проверка авторизованного пользователя
   useEffect(() => {
-    const token = Cookies.get('jwt');
     const userPath = location.pathname;
-    if (token) {
       mainApi.getUserInfo()
         .then(userData => {
           if (userData) {
@@ -64,9 +70,12 @@ function App({ history }) {
           }
         })
         .catch(err => {
-          showErrorPopup(err);
+          setErrorPopupStatus({
+            isOpen: false,
+            errCode: err.statusCode,
+            errMessage: err.message,
+          });
         })
-    }
   }, []);
 
   //получение информации о пользователе
@@ -109,7 +118,6 @@ function App({ history }) {
     await mainApi.authorize(email, password)
       .then(jwt => {
         if (jwt.token) {
-          Cookies.set('jwt', jwt.token);
           setLoggedIn(true);
           history.push('/movies');
         }
@@ -124,7 +132,6 @@ function App({ history }) {
     setCurrentUser({});
     setSavedMovies([]);
     setLoggedIn(false);
-    Cookies.remove('jwt');
     localStorage.clear();
     history.push('/');
   };

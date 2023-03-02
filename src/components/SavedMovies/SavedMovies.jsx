@@ -23,7 +23,7 @@ function SavedMovies({ savedMovies, onDeleteClick, loggedIn }) {
 
   //проверка чекбокса в хранилище
   useEffect(() => {
-    if (localStorage.getItem("isShortFilms" === "true")) {
+    if (localStorage.getItem("isShortFilms") === "true") {
       setIsShortFilms(true);
       setDisplayedMovies(filterShortMovies(savedMovies));
     } else {
