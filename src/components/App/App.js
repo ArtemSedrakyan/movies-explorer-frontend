@@ -24,6 +24,7 @@ function App({ history }) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
   const [isSuccessful, setIsSuccessful] = useState(false);
+  const [isSending, setIsSending] = useState(false);
 
   function closeErrorPopup() {
     setErrorPopupStatus({
@@ -103,6 +104,7 @@ function App({ history }) {
   }, [loggedIn, currentUser]);
 
   const handleRegister = async ({ email, password, name }) => {
+    setIsSending(true);
     await mainApi.register(email, password, name)
       .then(res => {
         if (res._id) {
@@ -112,9 +114,13 @@ function App({ history }) {
       .catch(err => {
         showErrorPopup(err);
       })
+      .finally(() => {
+        setIsSending(false);
+      })
   };
 
   const handleLogin = async ({ email, password }) => {
+    setIsSending(true);
     await mainApi.authorize(email, password)
       .then(jwt => {
         if (jwt.token) {
@@ -124,6 +130,9 @@ function App({ history }) {
       })
       .catch(err => {
         showErrorPopup(err);
+      })
+      .finally(() => {
+        setIsSending(false);
       })
   };
 
@@ -138,7 +147,7 @@ function App({ history }) {
 
   //колбэк редактирования профиля
   function handleUpdateUser({ name, email }) {
-    setIsLoading(true);
+    setIsSending(true);
     mainApi.updateUserInfo(name, email)
       .then(newUserData => {
         setCurrentUser(newUserData);
@@ -153,7 +162,7 @@ function App({ history }) {
         showErrorPopup(err);
       })
       .finally(() => {
-        setIsLoading(false);
+        setIsSending(false);
       })
   };
 
@@ -224,7 +233,7 @@ function App({ history }) {
           component={Profile}
           onUpdateProfile={handleUpdateUser}
           onLogOut={handleLogOut}
-          isLoading={isLoading}
+          isSending={isSending}
           isSuccessful={isSuccessful}
         />
         <Route path="/signin">
@@ -232,7 +241,7 @@ function App({ history }) {
             ? (
               <Login
                 onLogin={handleLogin}
-                isLoading={isLoading}
+                isSending={isSending}
               />
             )
             : (<Redirect to="/" />
@@ -244,7 +253,7 @@ function App({ history }) {
             ? (
               <Register
                 onRegister={handleRegister}
-                isLoading={isLoading}
+                isSending={isSending}
               />
             )
             : (<Redirect to="/" />
