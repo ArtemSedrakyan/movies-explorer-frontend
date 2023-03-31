@@ -41,6 +41,11 @@
   border-bottom: 1px solid #ff6838;
 }
 
+.form__input-auth:disabled {
+  color: #a0a0a0;
+  cursor: default;
+}
+
 .form__input-error {
   color: #ee3465;
   line-height: 1.21;

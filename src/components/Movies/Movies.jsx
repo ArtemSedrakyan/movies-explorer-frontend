@@ -21,7 +21,7 @@ function Movies({ isLoading, onOpenLoader, onCloseLoader, showErrorPopup, savedM
 
   //проверка чекбокса в хранилище
   useEffect(() => {
-    if (localStorage.getItem("isShortFilms") === "true") {
+    if (localStorage.getItem("isShortFilmsOnMoviesPage") === "true") {
       setIsShortFilms(true);
     } else {
       setIsShortFilms(false);
@@ -34,7 +34,7 @@ function Movies({ isLoading, onOpenLoader, onCloseLoader, showErrorPopup, savedM
       const storageMovies = JSON.parse(localStorage.getItem("movies"));
       setInitialMovies(storageMovies);
 
-      if (localStorage.getItem("isShortFilms") === "true") {
+      if (localStorage.getItem("isShortFilmsOnMoviesPage") === "true") {
         setFilteredMovies(filterShortMovies(storageMovies));
       } else {
         setFilteredMovies(storageMovies);
@@ -50,7 +50,7 @@ function Movies({ isLoading, onOpenLoader, onCloseLoader, showErrorPopup, savedM
     } else {
       setFilteredMovies(initialMovies);
     }
-    localStorage.setItem("isShortFilms", !isShortFilms);
+    localStorage.setItem("isShortFilmsOnMoviesPage", !isShortFilms);
   };
 
   //колбэк поика фильма по ключевому слову и чекбоксу
@@ -70,7 +70,7 @@ function Movies({ isLoading, onOpenLoader, onCloseLoader, showErrorPopup, savedM
   //поиск по запросу из SearchForm
   function handleSearchSubmit (inputValue) {
     localStorage.setItem("InputValue", inputValue);
-    localStorage.setItem("isShortFilms", isShortFilms);
+    localStorage.setItem("isShortFilmsOnMoviesPage", isShortFilms);
 
     if (allMovies.length === 0) {
       onOpenLoader();

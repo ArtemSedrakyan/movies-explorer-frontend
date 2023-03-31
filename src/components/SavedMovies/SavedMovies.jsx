@@ -23,7 +23,7 @@ function SavedMovies({ savedMovies, onDeleteClick, loggedIn }) {
 
   //проверка чекбокса в хранилище
   useEffect(() => {
-    if (localStorage.getItem("isShortFilms") === "true") {
+    if (localStorage.getItem("isShortFilmsOnSavedMoviesPage") === "true") {
       setIsShortFilms(true);
       setDisplayedMovies(filterShortMovies(savedMovies));
     } else {
@@ -35,11 +35,11 @@ function SavedMovies({ savedMovies, onDeleteClick, loggedIn }) {
   function handleToggleShortFilms() {
     if (!isShortFilms) {
       setIsShortFilms(true);
-      localStorage.getItem("isShortFilms", "true");
+      localStorage.getItem("isShortFilmsOnSavedMoviesPage", "true");
       setDisplayedMovies(filterShortMovies(filteredMovies));
     } else {
       setIsShortFilms(false);
-      localStorage.getItem("isShortFilms", "false");
+      localStorage.getItem("isShortFilmsOnSavedMoviesPage", "false");
       setDisplayedMovies(filteredMovies);
     }
   };

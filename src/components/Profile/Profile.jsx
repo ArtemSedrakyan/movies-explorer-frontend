@@ -1,11 +1,10 @@
 import { useEffect, useContext } from "react";
 import Header from "../Header/Header";
 import Form from "../Form/Form";
-import Preloader from "../Preloader/Preloader";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 
-function Profile({ onUpdateProfile, onLogOut, isLoading, isSuccessful }) {
+function Profile({ onUpdateProfile, onLogOut, isSending, isSuccessful }) {
   const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
   const currentUser = useContext(CurrentUserContext);
 
@@ -35,35 +34,31 @@ function Profile({ onUpdateProfile, onLogOut, isLoading, isSuccessful }) {
         isValid={isValid}
         onSubmit={handleSubmit}
       >
-        { !isLoading
-          ?
-            <>
-              <label className="form__field">
-                <span className="form__input-title">Имя</span>
-                <input className="form__input" name="name" type="text" value={values.name || ""}
-                  onChange={handleChange} minLength="2" maxLength="30" pattern="^[A-Za-zА-Яа-яЁё /s -]+$" required/>
-                <span className="form__input-error">{errors.name || ""}</span>
-              </label>
-              <label className="form__field">
-                <span className="form__input-title">E-mail</span>
-                <input className="form__input" name="email" type="email" value={values.email || ""}
-                  onChange={handleChange} required/>
-                <span className="form__input-error">{errors.email || ""}</span>
-                { isSuccessful && (<span className="form__success-message">Данные успешно обновлены!</span>)}
-              </label>
-              <div className="form__button-box">
-                <button className={`form__submit-button ${validityState ? "form__submit-button_disabled" : "form__submit-button_type_edit"}`}
-                  type="submit" disabled={validityState ? true : false}>
-                  Редактировать
-                </button>
-                <button className="form__route-container_type_logout" type="button"
-                  onClick={onLogOut}>
-                  Выйти из аккаунта
-                </button>
-              </div>
-            </>
-          : <Preloader />
-        }
+        <>
+          <label className="form__field">
+            <span className="form__input-title">Имя</span>
+            <input className="form__input" name="name" type="text" value={values.name || ""} onChange={handleChange}
+              minLength="2" maxLength="30" pattern="^[A-Za-zА-Яа-яЁё /s -]+$" disabled={isSending} required/>
+            <span className="form__input-error">{errors.name || ""}</span>
+          </label>
+          <label className="form__field">
+            <span className="form__input-title">E-mail</span>
+            <input className="form__input" name="email" type="email" value={values.email || ""}
+              onChange={handleChange} disabled={isSending} required/>
+            <span className="form__input-error">{errors.email || ""}</span>
+            { isSuccessful && (<span className="form__success-message">Данные успешно обновлены!</span>)}
+          </label>
+          <div className="form__button-box">
+            <button className={`form__submit-button ${validityState ? "form__submit-button_disabled" : "form__submit-button_type_edit"}`}
+              type="submit" disabled={validityState ? true : false}>
+              Редактировать
+            </button>
+            <button className="form__route-container_type_logout" type="button"
+              onClick={onLogOut}>
+              Выйти из аккаунта
+            </button>
+          </div>
+        </>
       </Form>
     </section>
     </>
