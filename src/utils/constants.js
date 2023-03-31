@@ -28,3 +28,29 @@ export const footerLinks = [
     link: "https://github.com/",
   },
 ];
+
+export const DEVICE_PARAMS = {
+  desktop: {
+    width: 1007,
+    cards: {
+      total: 12,
+      more: 3,
+    },
+  },
+  tablet: {
+    width: 481,
+    cards: {
+      total: 8,
+      more: 2,
+    },
+  },
+  mobile: {
+    width: 481,
+    cards: {
+      total: 5,
+      more: 1,
+    },
+  },
+};
+
+export const SHORTMOVIES_DURATION = 40;

@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import MenuPopup from '../MenuPopup/MenuPopup';
 
-function Header() {
+function Header({ loggedIn }) {
   const location = useLocation();
   const [isMenuPopupOpen, setIsMenuPopupOpen] = useState(false);
 
@@ -21,6 +21,7 @@ function Header() {
     }>
       <Navigation
         onOpenMenuPopup={openMenuPopup}
+        loggedIn={loggedIn}
       />
       <MenuPopup
         isOpen={isMenuPopupOpen}

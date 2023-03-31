@@ -12,7 +12,7 @@
 }
 
 .form__field-auth:last-of-type {
-  margin-bottom: 152px;
+  margin-bottom: 100px;
 }
 
 .form__input-title-auth {
@@ -41,6 +41,11 @@
   border-bottom: 1px solid #ff6838;
 }
 
+.form__input-auth:disabled {
+  color: #a0a0a0;
+  cursor: default;
+}
+
 .form__input-error {
   color: #ee3465;
   line-height: 1.21;
@@ -49,7 +54,7 @@
   position: absolute;
   top: calc(100% + 6px);
   left: 0;
-  opacity: 1; /*поменять на 0*/
+  opacity: 1;
 }
 
 .form__input-error_visible {

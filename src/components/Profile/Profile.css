@@ -8,6 +8,7 @@
   align-items: center;
   line-height: 1.21;
   font-size: 11px;
+  position: relative;
 }
 
 .form__field:first-of-type {
@@ -25,12 +26,49 @@
 }
 
 .form__input {
-  max-width: 122px;
-  padding: 0;
+  padding: 0 5px;
   border: none;
+  border-radius: 3px;
   text-align: end;
   font-weight: 400;
 }
+
+.form__input:focus-visible {
+  outline: none;
+  border: 1px solid #ff6838;
+}
+
+.form__input:disabled {
+  color: #a0a0a0;
+  cursor: default;
+}
+
+.form__route-container_type_logout {
+  border: none ;
+  color: #ee3465;
+  background: none;
+  line-height: 1.23;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.form__route-container_type_logout:hover {
+  cursor: pointer;
+  opacity: .8;
+}
+
+.form__success-message {
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: calc(100% + 50px);
+  left: 0;
+  -webkit-text-stroke: .3px #2be080;
+  font-size: 13px;
+}
+
 
 @media screen and (max-width: 1140px) {
   .form__field:last-of-type {
@@ -40,6 +78,11 @@
 
 @media screen and (max-width: 580px) {
   .form__field:last-of-type {
-    margin-bottom: 50px;
+    margin-bottom: 100px;
+  }
+
+  .form__route-container_type_logout {
+    line-height: 1.21;
+    font-size: 12px;
   }
 }
