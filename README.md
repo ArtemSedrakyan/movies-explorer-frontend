@@ -8,6 +8,9 @@
 
 * **HTML, CSS, JavaScript**
 
+* Для запуска проекта на локальном сервере введите команду:
+``` npm run start ```
+
 * [Ссылка на макет](https://disk.yandex.ru/d/ZpSuPWJ35G1wmg)
 
 * [ссылка на pull request level-3](https://github.com/ArtemSedrakyan/movies-explorer-frontend/pull/3)
