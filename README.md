@@ -2,8 +2,6 @@
 
 Автор: [Артем Седракян](https://github.com/ArtemSedrakyan)
 
-![](./src/images/movies_demo.png)
-
 * Проект представляет собой пользовательскую часть дипломного проекта movies-explorer.
 
 * HTML, CSS, JavaScript
